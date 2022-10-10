@@ -1,0 +1,26 @@
+﻿@if (Peliculas == null)
+{
+    <div class="text-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+}
+else if (Peliculas.Count() == 0)
+{
+    <p>No hay películas para mostrar!</p>
+}
+else {
+    <h3>Movies</h3>
+    @foreach(var pelicula in Peliculas)
+    {
+        <Movie 
+            Pelicula="pelicula" 
+         />
+    }
+}
+
+@code {
+    [Parameter]
+    public List<Pelicula> Peliculas { get; set; }
+}

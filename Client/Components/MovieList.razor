@@ -11,11 +11,14 @@ else if (Peliculas.Count() == 0)
     <p>No hay películas para mostrar!</p>
 }
 else {
+    <input type="checkbox" @bind="ShowButtons"/>
     <h3>Movies</h3>
     @foreach(var pelicula in Peliculas)
     {
         <Movie 
-            Pelicula="pelicula" 
+            Pelicula="pelicula"
+            ShowButtons="ShowButtons"
+            DeleteMovie="DeleteMovie"
          />
     }
 }
@@ -23,4 +26,10 @@ else {
 @code {
     [Parameter]
     public List<Pelicula> Peliculas { get; set; }
+    private bool ShowButtons { get; set; } = false;
+    private void DeleteMovie(Pelicula movie)
+    {
+        Peliculas.Remove(movie);
+        Console.WriteLine($"Movie {movie.Title} was deleted!"); 
+    }
 }

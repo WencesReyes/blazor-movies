@@ -1,0 +1,6 @@
+﻿<input @attributes="Props" />
+
+@code {
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IDictionary<string, object> Props { get; set; }
+}

@@ -4,8 +4,14 @@
     Peliculas="GetMovies()" 
 />
 
+<MyInput @attributes="Props" />
+
 @code {
     string Nombre { get; } = "Wences";
+
+    public IDictionary<string, object> Props => new Dictionary<string, object>() 
+    { { "type", "text" },
+    { "disabled", true } };
 
     public Pelicula Pelicula { get => GetMovie(); }
 

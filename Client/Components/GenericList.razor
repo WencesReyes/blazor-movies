@@ -1,0 +1,42 @@
+﻿@typeparam TItem
+
+@if (List == null)
+{
+    @if (Loading == null)
+    {
+        <text>Loading...</text>
+    }
+    else
+    {
+        @Loading
+    }
+}
+else if (List.Count() == 0)
+{
+    @if(NoRecords == null)
+    {
+        <text>No records to display</text>
+    }
+    else
+    {
+        @NoRecords
+    }
+}
+else {
+    @foreach(var item in List)
+    {
+        @RenderItem(item);
+    }
+}
+
+
+@code {
+    [Parameter]
+    public RenderFragment Loading { get; set; }
+    [Parameter]
+    public RenderFragment NoRecords { get; set; }
+    [Parameter]
+    public RenderFragment<TItem> RenderItem { get; set; }
+    [Parameter]
+    public List<TItem> List { get; set; }
+}

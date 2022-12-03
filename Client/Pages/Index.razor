@@ -1,39 +1,26 @@
 ﻿@page "/"
+@inject IMovieRepository movieRepository;
 
 <MovieList 
-    Peliculas="GetMovies()" 
-/>
+    Peliculas="Movies">
+</MovieList>
 
 <MyInput @attributes="Props" />
+
+<button type="button" @onclick="onAddHandler">Add movie</button>
 
 @code {
     string Nombre { get; } = "Wences";
 
-    public IDictionary<string, object> Props => new Dictionary<string, object>() 
+    public IDictionary<string, object> Props => new Dictionary<string, object>()
     { { "type", "text" },
     { "disabled", true } };
 
-    public Pelicula Pelicula { get => GetMovie(); }
+    public MovieEntity Pelicula { get => GetMovie(); }
 
-    private List<Pelicula> GetMovies() => new List<Pelicula>() {
-        new Pelicula
-        {
-            Title = "Moana",
-            LaunchDate = new DateTime(2012, 8, 1)
-        },
-        new Pelicula
-        {
-            Title = "Spide-Man",
-            LaunchDate = new DateTime(2019, 9, 27)
-        },
-        new Pelicula
-        {
-            Title = "Titanic",
-            LaunchDate = new DateTime(2015, 12, 10)
-        }
-    };
+    private List<MovieEntity> Movies { get; set; }
 
-    private Pelicula GetMovie() => new Pelicula() 
+    private MovieEntity GetMovie() => new MovieEntity() 
     {
         Title = "Spide-Man",
         LaunchDate = new DateTime(2019, 9, 27)
@@ -42,5 +29,20 @@
     void OnClickHanlder()
     {
         Console.WriteLine("You clicked me!");
+    }
+
+    void onAddHandler()
+    {
+        Movies.Add(new MovieEntity() { Title = "New movie", LaunchDate = new DateTime(2000, 12, 12) });
+    }
+
+    protected override void OnInitialized()
+    {
+        Movies = movieRepository.GetAll().ToList();
+    }
+
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine($"OnParametersSet - Movies count: {Movies.Count}");
     }
 }

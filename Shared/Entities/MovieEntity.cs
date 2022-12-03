@@ -1,6 +1,6 @@
 ﻿namespace BlazorPeliculas.Shared.Entities
 {
-    public class Pelicula
+    public class MovieEntity
     {
         public string Title { get; set; }
         public DateTime LaunchDate { get; set; }

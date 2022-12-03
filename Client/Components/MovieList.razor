@@ -1,35 +1,24 @@
-﻿@if (Peliculas == null)
-{
-    <div class="text-center">
-        <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
+﻿
+<input type="checkbox" @bind="ShowButtons"/>
+<h3>Movies</h3>
+<GenericList List=@Peliculas > 
+    <NoRecords>
+        <p>No hay peliculas para mostrar</p>
+    </NoRecords>
+
+    <Loading>
+        <div class="text-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
         </div>
-    </div>
-}
-else if (Peliculas.Count() == 0)
-{
-    <p>No hay películas para mostrar!</p>
-}
-else {
-    <input type="checkbox" @bind="ShowButtons"/>
-    <h3>Movies</h3>
-    @foreach(var pelicula in Peliculas)
-    {
+    </Loading>
+
+    <RenderItem Context="movie">
         <Movie 
-            Pelicula="pelicula"
+            Pelicula="movie"
             ShowButtons="ShowButtons"
             DeleteMovie="DeleteMovie"
          />
-    }
-}
-
-@code {
-    [Parameter]
-    public List<Pelicula> Peliculas { get; set; }
-    private bool ShowButtons { get; set; } = false;
-    private void DeleteMovie(Pelicula movie)
-    {
-        Peliculas.Remove(movie);
-        Console.WriteLine($"Movie {movie.Title} was deleted!"); 
-    }
-}
+    </RenderItem>
+</GenericList>

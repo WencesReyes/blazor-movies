@@ -1,24 +1,26 @@
 ﻿
 <input type="checkbox" @bind="ShowButtons"/>
 <h3>Movies</h3>
-<GenericList List=@Movies > 
-    <NoRecords>
-        <p>No hay peliculas para mostrar</p>
-    </NoRecords>
+<section class="d-flex align-items-center flex-wrap">
+    <GenericList List=@Movies > 
+        <NoRecords>
+            <p>No hay peliculas para mostrar</p>
+        </NoRecords>
 
-    <Loading>
-        <div class="text-center">
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
+        <Loading>
+            <div class="text-center">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             </div>
-        </div>
-    </Loading>
+        </Loading>
 
-    <RenderItem Context="movie">
-        <Movie 
-            Pelicula="movie"
-            ShowButtons="ShowButtons"
-            DeleteMovie="DeleteMovie"
-         />
-    </RenderItem>
-</GenericList>
+        <RenderItem Context="movie">
+            <Movie 
+                MovieItem="movie"
+                ShowButtons="ShowButtons"
+                DeleteMovie="DeleteMovie"
+             />
+        </RenderItem>
+    </GenericList>
+</section>

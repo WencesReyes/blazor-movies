@@ -1,7 +1,7 @@
 ﻿using BlazorPeliculas.Client.Helpers;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using Microsoft.JSInterop.Implementation;
+using MathNet.Numerics.Statistics;
 
 namespace BlazorPeliculas.Client.Pages
 {
@@ -23,6 +23,8 @@ namespace BlazorPeliculas.Client.Pages
             CurrentCount++;
             CurrentCountStatic++;
             await Js.InvokeVoidAsync("TestGetCurrentStaticValue");
+            var numberArray = new double[] { 1, 2 };
+            Console.WriteLine(numberArray.Maximum());
         }
 
         public async Task IncrementCountJs()

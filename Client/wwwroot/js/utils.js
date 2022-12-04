@@ -6,3 +6,7 @@ function TestGetCurrentStaticValue() {
             console.log(error);
         });
 }
+
+function TestGetCurrentValueFromInstance(dotnetHelper) {
+    dotnetHelper.invokeMethodAsync("IncrementCount");
+}

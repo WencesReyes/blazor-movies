@@ -10,7 +10,7 @@ namespace BlazorPeliculas.Client.Components
         [Inject]
         private IJSRuntime Js { get; set; }
         [Parameter]
-        public List<MovieEntity> Peliculas { get; set; }
+        public List<MovieEntity> Movies { get; set; }
 
         private bool ShowButtons { get; set; } = false;
 
@@ -19,19 +19,19 @@ namespace BlazorPeliculas.Client.Components
             var confirmed = await Js.Confirm($"Are you sure to delete movie: {movie.Title}?");
             if (confirmed)
             {
-                Peliculas.Remove(movie);
+                Movies.Remove(movie);
                 Console.WriteLine($"Movie {movie.Title} was deleted!");
             }
         }
 
         protected override void OnInitialized()
         {
-            Console.WriteLine($"OnInitialized - Movies count: {Peliculas.Count}");
+            Console.WriteLine($"OnInitialized - Movies count: {Movies.Count}");
         }
 
         protected override void OnParametersSet()
         {
-            Console.WriteLine($"OnParametersSet - Movies count: {Peliculas.Count}");
+            Console.WriteLine($"OnParametersSet - Movies count: {Movies.Count}");
         }
 
         protected override bool ShouldRender()
@@ -43,6 +43,12 @@ namespace BlazorPeliculas.Client.Components
         protected override void OnAfterRender(bool firstRender)
         {
             Console.WriteLine($"OnAfterRender {firstRender}");
+        }
+
+        public void CleanMovies() 
+        {
+            if (Movies is not null)
+                Movies.Clear();
         }
     }
 }

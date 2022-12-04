@@ -1,8 +1,11 @@
 ﻿@page "/"
 @inject IMovieRepository movieRepository;
 
-<MovieList 
-    Peliculas="Movies">
+<button @onclick="CleanMovieList">Clean movie list</button>
+
+<MovieList
+    @ref="MovieListRef"
+    Movies="Movies">
 </MovieList>
 
 <MyInput @attributes="Props" />
@@ -19,6 +22,8 @@
     public MovieEntity Pelicula { get => GetMovie(); }
 
     private List<MovieEntity> Movies { get; set; }
+
+    private MovieList MovieListRef;
 
     private MovieEntity GetMovie() => new MovieEntity() 
     {
@@ -44,5 +49,10 @@
     protected override void OnParametersSet()
     {
         Console.WriteLine($"OnParametersSet - Movies count: {Movies.Count}");
+    }
+
+    private void CleanMovieList()
+    {
+        MovieListRef.CleanMovies();
     }
 }

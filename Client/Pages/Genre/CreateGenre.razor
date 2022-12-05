@@ -1,7 +1,14 @@
 ﻿@page "/genre/create"
 
-<h3>CreateGenre</h3>
+<h3>Create genre</h3>
 
-@code {
+<EditForm Model="Genre" OnSubmit="Create" class="row my-2">
+    <div class="my-2">
+        <label for="Description" class="form-label">Description</label>
+        <InputText @bind-Value="Genre.Description" DisplayName="Genre description" class="form-control form-control-sm" id="Description" />
+    </div>
+    <div>
+        <button type="submit" class="btn btn-success btn-sm">Save</button>
+    </div>
+</EditForm>
 
-}
